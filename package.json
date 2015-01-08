@@ -1,0 +1,31 @@
+{
+  "name": "cypher-promise",
+  "version": "1.0.0",
+  "description": "A wrapper over node-cypher which is promise-based",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RangerMauve/cypher-promise.git"
+  },
+  "keywords": [
+    "cypher",
+    "promise",
+    "query",
+    "neo4j",
+    "graph"
+  ],
+  "author": "rangermauve",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/RangerMauve/cypher-promise/issues"
+  },
+  "homepage": "https://github.com/RangerMauve/cypher-promise",
+  "dependencies": {
+    "any-promise": "^0.1.0",
+    "node-cypher": "^0.1.4",
+    "par": "^0.3.0"
+  }
+}
