@@ -39,13 +39,26 @@ function make_query_maker(connection_string, connection_opts) {
 	 * @return {Multi} Returns a multi object with `query` and `exec` methods
 	 */
 	function multi() {
-		return get_client().then(function(client) {
-			var multi_batch = client.multi();
-			return {
-				query: par(query_with, multi_batch),
-				exec: make_promise(multi_batch.exec.bind(multi_batch))
-			};
+		var multi = get_client().then(function(client) {
+			return client.multi();
 		});
+
+		return {
+			query: query,
+			exec: exec
+		};
+
+		function query(cypher_query, parameters) {
+			return multi.then(function(multi) {
+				return query_with(multi, cypher_query, parameters);
+			});
+		}
+
+		function exec() {
+			return multi.then(function(multi) {
+				return make_promise(multi.exec.bind(multi))();
+			})
+		}
 	}
 
 	// Makes a query with a given client and returns a promise
@@ -70,7 +83,7 @@ function make_query_maker(connection_string, connection_opts) {
 }
 
 function make_promise(thunk) {
-	return new Promise(function(reject, resolve) {
+	return new Promise(function(resolve, reject) {
 		thunk(function(err, result) {
 			if (err) reject(err);
 			else resolve(result);
