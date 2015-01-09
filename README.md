@@ -1,8 +1,6 @@
 cypher-promise
 ==============
 
-**WARNING:** This isn't ready yet so it's not on npm
-
 A wrapper over node-cypher which is promise-based. This uses [any-promise](https://www.npmjs.com/package/any-promise) so you're expected to install a promise library that's compatible.
 
 ```
