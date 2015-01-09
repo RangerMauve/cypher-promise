@@ -27,5 +27,8 @@
     "any-promise": "^0.1.0",
     "node-cypher": "^0.1.4",
     "par": "^0.3.0"
+  },
+  "devDependencies": {
+    "promise": "^6.0.1"
   }
 }
