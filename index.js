@@ -69,7 +69,7 @@ function make_query_maker(connection_string, connection_opts) {
 
 	// Creates a new client or returns a cached one
 	function get_client() {
-		if (client_cache) return Promise.resolve(client);
+		if (client_cache) return Promise.resolve(client_cache);
 		return make_promise(
 			cypher.createClient.bind(cypher, connection_string, connection_opts)
 		).then(cache_client);
