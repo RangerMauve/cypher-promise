@@ -1,3 +1,4 @@
+"use strict";
 var Promise = require("any-promise");
 var cypher = require("node-cypher");
 var par = require("par");
@@ -12,7 +13,7 @@ module.exports = make_query_maker;
  * @return {Cypher}                    Returns a new Cypher client
  */
 function make_query_maker(connection_string, connection_opts) {
-	connection_string = connection_string || "http://localhost:7474"
+	connection_string = connection_string || "http://localhost:7474";
 	connection_opts = connection_opts || {};
 	var client_cache = null;
 
@@ -39,7 +40,7 @@ function make_query_maker(connection_string, connection_opts) {
 	 * @return {Multi} Returns a multi object with `query` and `exec` methods
 	 */
 	function multi() {
-		var multi = get_client().then(function(client) {
+		var multi = get_client().then(function (client) {
 			return client.multi();
 		});
 
@@ -49,15 +50,15 @@ function make_query_maker(connection_string, connection_opts) {
 		};
 
 		function query(cypher_query, parameters) {
-			return multi.then(function(multi) {
+			return multi.then(function (multi) {
 				return query_with(multi, cypher_query, parameters);
 			});
 		}
 
 		function exec() {
-			return multi.then(function(multi) {
-				return make_promise(multi.exec.bind(multi))();
-			})
+			return multi.then(function (multi) {
+				return make_promise(multi.exec.bind(multi));
+			});
 		}
 	}
 
@@ -83,8 +84,8 @@ function make_query_maker(connection_string, connection_opts) {
 }
 
 function make_promise(thunk) {
-	return new Promise(function(resolve, reject) {
-		thunk(function(err, result) {
+	return new Promise(function (resolve, reject) {
+		thunk(function (err, result) {
 			if (err) reject(err);
 			else resolve(result);
 		});

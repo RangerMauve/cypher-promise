@@ -1,3 +1,4 @@
+"use strict";
 // Require the module
 var cypher = require("./");
 var Promise = require("any-promise");
@@ -24,7 +25,7 @@ while (index--) {
 }
 
 // Execute the batch
-multi.exec().then(log.bind(null, "Multi executed"));
+multi.exec().then(log.bind(null, "Multi executed")).catch(err.bind("Multi Errored"));
 
 // Once all the promises resolve
 Promise.all(queries).then(log, err);
@@ -34,5 +35,5 @@ function log(data) {
 }
 
 function err(data) {
-	console.error("Error", data);
+	console.error("Error", data, data.stack);
 }
